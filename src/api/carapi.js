@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/cars";
+const API_URL = "https://fullstack-backend-demo-1.onrender.com/api/cars";
 
 const getToken = () => sessionStorage.getItem("jwt");
 
