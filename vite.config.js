@@ -1,7 +1,6 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   test: {
@@ -9,5 +8,13 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.js",
     css: true,
+    server: {
+      deps: {
+        inline: [/(@mui|@emotion)/],
+      },
+    },
+    alias: {
+      "\\.css$": "/src/test-css-stub.js",
+    },
   },
 });
