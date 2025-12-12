@@ -1,11 +1,19 @@
 import axios from "axios";
 
-const API_URL = "https://fullstack-backend-demo-1.onrender.com/api/cars";
+const BASE_URL = "https://fullstack-backend-demo-1.onrender.com"; // ОБЯЗАТЕЛЬНО с -1
 
 const getToken = () => sessionStorage.getItem("jwt");
 
+export const login = (user) => {
+  return axios.post(`${BASE_URL}/login`, user, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export const getCars = async () => {
-  const response = await axios.get(API_URL, {
+  const response = await axios.get(`${BASE_URL}/api/cars`, {
     headers: {
       Authorization: "Bearer " + getToken(),
     },
@@ -20,26 +28,3 @@ export const getCars = async () => {
     selfHref: car._links?.self?.href,
   }));
 };
-
-export const addCar = async (car) =>
-  axios.post(API_URL, car, {
-    headers: {
-      Authorization: "Bearer " + getToken(),
-      "Content-Type": "application/json",
-    },
-  });
-
-export const updateCar = async (selfHref, car) =>
-  axios.put(selfHref, car, {
-    headers: {
-      Authorization: "Bearer " + getToken(),
-      "Content-Type": "application/json",
-    },
-  });
-
-export const deleteCar = async (selfHref) =>
-  axios.delete(selfHref, {
-    headers: {
-      Authorization: "Bearer " + getToken(),
-    },
-  });

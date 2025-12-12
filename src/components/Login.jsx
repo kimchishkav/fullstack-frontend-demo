@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { login } from "./api"; // ← ИМПОРТ ИЗ api.js
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -16,8 +16,7 @@ function Login() {
   };
 
   const handleLogin = () => {
-    axios
-      .post("https://fullstack-backend-demo.onrender.com/login", user)
+    login(user)
       .then((res) => {
         const token = res.data.token;
         if (token) {
